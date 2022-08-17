@@ -1,0 +1,140 @@
+openapi: '3.0.2'
+info:
+  title: Shopping Cart
+  version: '1.0'
+servers:
+  - url: https://localhost:8000/api/v1
+paths:
+  /Products:
+    post:
+      tags:
+        - "Products"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kode_product:
+                  type: string
+                  example: p-001
+                nama_product:
+                  type: string
+                  example: buku
+                kuantitas:
+                  type: number
+                  example: 10
+      responses:
+        '200':
+          description: "success create new products"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: "success create new products"
+    get:
+      tags:
+        - "Products"
+      parameters:
+        - in: query
+          name: nama_product
+          schema:
+            type: string
+            example: buku
+        - in: query
+          name: kuantitas
+          schema:
+            type: number
+            example: 10
+      responses:
+        '200':
+          description: "success get list product"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: "success get list product"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kode_products:
+                          type: string
+                          example: p-001
+                        nama_product:
+                          type: string
+                          example: buku
+                        kuantitas:
+                          type: number
+                          example: 10
+  /Products/{productKode}:
+    put:
+      tags:
+        - "Products"
+      parameters:
+        - name: productKode
+          in: path
+          required: true
+          schema:
+            type: string
+            example: p-001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kuantitas:
+                  type: number
+                  example: 10
+      responses:
+        '200':
+          description: "success update quantity products"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: "success update quantity products"                
+    delete:
+      tags:
+        - "Products"
+      parameters:
+        - name: productKode
+          in: path
+          required: true
+          schema:
+            type: string
+            example: p-001
+      responses:
+        '200':
+          description: "success delete product"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: "success delete product" 
