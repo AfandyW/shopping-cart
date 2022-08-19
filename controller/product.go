@@ -94,7 +94,12 @@ func (c *Controller) Update(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Controller) List(w http.ResponseWriter, r *http.Request) {
-	products, err := c.service.List(r.Context())
+	query := r.URL.Query()
+	productName := query.Get("product_name")
+
+	products, err := c.service.List(r.Context(), domain.Filter{
+		ProductName: productName,
+	})
 	if err != nil {
 		send(w, http.StatusBadRequest, err.Error(), nil)
 		return

@@ -132,22 +132,30 @@ func (s *service) Get(ctx context.Context, productCode string) (*domain.ProductR
 	}, nil
 }
 
-func (s *service) List(ctx context.Context) ([]domain.ProductResponse, error) {
-	resp, err := s.Repo.List(ctx, s.DB)
-	if err != nil {
-		return nil, fmt.Errorf("return err %s", err.Error())
+func (s *service) List(ctx context.Context, filter domain.Filter) (resp []domain.ProductResponse, err error) {
+	var data []domain.Product
+
+	if filter.ProductName != "" {
+		data, err = s.Repo.ListWithFilter(ctx, s.DB, filter)
+		if err != nil {
+			return nil, fmt.Errorf("return err %s", err.Error())
+		}
+	} else {
+		data, err = s.Repo.List(ctx, s.DB)
+		if err != nil {
+			return nil, fmt.Errorf("return err %s", err.Error())
+		}
 	}
 
-	var products []domain.ProductResponse
-	for _, v := range resp {
+	for _, v := range data {
 		product := domain.ProductResponse{
 			ProductCode: v.ProductCode,
 			ProductName: v.ProductName,
 			Quantity:    v.Quantity,
 		}
 
-		products = append(products, product)
+		resp = append(resp, product)
 	}
 
-	return products, nil
+	return resp, nil
 }

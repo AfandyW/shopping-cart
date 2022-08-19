@@ -107,7 +107,7 @@ func (r *repo) List(ctx context.Context, db *sql.DB) ([]domain.Product, error) {
 }
 
 func (r *repo) Get(ctx context.Context, db *sql.DB, productCode string) (*domain.Product, error) {
-	sql := "select product_code, product_name, quantity from products"
+	sql := "select product_code, product_name, quantity from products where product_code = $1"
 	rows, err := db.QueryContext(ctx, sql, productCode)
 
 	if err != nil {
@@ -150,4 +150,29 @@ func (r *repo) GetByName(ctx context.Context, db *sql.DB, productName string) (*
 		}
 	}
 	return &product, nil
+}
+
+func (r *repo) ListWithFilter(ctx context.Context, db *sql.DB, filter domain.Filter) ([]domain.Product, error) {
+	sql := "select product_code, product_name, quantity from products where product_name=$1"
+	rows, err := db.QueryContext(ctx, sql, filter.ProductName)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var products []domain.Product
+	for rows.Next() {
+		var product domain.Product
+		if err := rows.Scan(
+			&product.ProductCode,
+			&product.ProductName,
+			&product.Quantity,
+		); err != nil {
+			return nil, err
+		}
+
+		products = append(products, product)
+	}
+	return products, nil
 }

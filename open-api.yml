@@ -3,9 +3,9 @@ info:
   title: Shopping Cart
   version: '1.0'
 servers:
-  - url: https://localhost:8000/api/v1
+  - url: http://localhost:8000/api/v1
 paths:
-  /Products:
+  /products:
     post:
       tags:
         - "Products"
@@ -41,17 +41,6 @@ paths:
     get:
       tags:
         - "Products"
-      parameters:
-        - in: query
-          name: nama_product
-          schema:
-            type: string
-            example: buku
-        - in: query
-          name: kuantitas
-          schema:
-            type: number
-            example: 10
       responses:
         '200':
           description: "success get list product"
@@ -80,7 +69,7 @@ paths:
                         kuantitas:
                           type: number
                           example: 10
-  /Products/{productKode}:
+  /products/{productKode}:
     put:
       tags:
         - "Products"
