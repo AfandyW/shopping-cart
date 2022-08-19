@@ -29,17 +29,145 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8000/products",
+					"raw": "http://localhost:8000/api/v1/products",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"products"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": 201,\n    \"message\": \"success get list product\",\n    \"data\": [\n        {\n            \"product_code\": \"p-1\",\n            \"product_name\": \"buku\",\n            \"quantity\": 10\n        },\n        {\n            \"product_code\": \"p-2\",\n            \"product_name\": \"polpen\",\n            \"quantity\": 20\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "List Filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products?product_name=buku",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "product_name",
+							"value": "buku"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": 201,\n    \"message\": \"success get list product\",\n    \"data\": [\n        {\n            \"product_code\": \"p-1\",\n            \"product_name\": \"buku\",\n            \"quantity\": 10\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get by product kode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/p-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"p-1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/products/p-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"p-1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": 201,\n    \"message\": \"success get product\",\n    \"data\": {\n        \"product_code\": \"p-1\",\n        \"product_name\": \"buku\",\n        \"quantity\": 10\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "create",
@@ -48,7 +176,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_name\": \"Buku\",\n    \"quantity\": 12\n}",
+					"raw": "{\n    \"product_name\": \"polpen hitam\",\n    \"quantity\": 20\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,12 +184,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/products",
+					"raw": "localhost:8000/api/v1/products",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"products"
 					]
 				}
@@ -82,12 +212,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/products",
+							"raw": "localhost:8000/api/v1/products",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
+								"v1",
 								"products"
 							]
 						}
@@ -114,14 +246,16 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/products/p-3",
+					"raw": "localhost:8000/api/v1/products/p-2",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"products",
-						"p-3"
+						"p-2"
 					]
 				}
 			},
@@ -141,12 +275,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/products/p-3",
+							"raw": "localhost:8000/api/v1/products/p-3",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
+								"v1",
 								"products",
 								"p-3"
 							]
@@ -174,12 +310,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8000/products/p-3",
+					"raw": "localhost:8000/api/v1/products/p-3",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"products",
 						"p-3"
 					]
@@ -201,12 +339,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/products/p-3",
+							"raw": "localhost:8000/api/v1/products/p-3",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
+								"v1",
 								"products",
 								"p-3"
 							]
